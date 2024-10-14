@@ -1,7 +1,13 @@
 import * as React from "react"
-import { cn } from "../../lib/utils.js"
+import { cn } from "../../lib/utils"
 
-const Checkbox = React.forwardRef(({ className, ...props }, ref) => {
+const Checkbox = React.forwardRef(({ className, onCheckedChange, ...props }, ref) => {
+  const handleChange = (event) => {
+    if (onCheckedChange) {
+      onCheckedChange(event.target.checked)
+    }
+  }
+
   return (
     <input
       type="checkbox"
@@ -10,6 +16,7 @@ const Checkbox = React.forwardRef(({ className, ...props }, ref) => {
         className
       )}
       ref={ref}
+      onChange={handleChange}
       {...props}
     />
   )
